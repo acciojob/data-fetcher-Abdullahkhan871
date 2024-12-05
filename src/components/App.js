@@ -4,17 +4,26 @@ import axios from "axios";
 
 const App = () => {
   const [fetchData, setFetchData] = useState("");
+  const [error, setError] = useState(true);
 
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((response) => response.json())
-      .then((response) => setFetchData(response));
+      .then((response) => setFetchData(response))
+      .catch((err) => {
+        console.log(err);
+        setError(false);
+      });
   }, []);
 
   return (
     <div>
       <h1>Data Fetched from API</h1>
-      <pre>{JSON.stringify(fetchData, null, 2)}</pre>
+      {error ? (
+        <pre>{JSON.stringify(fetchData, null, 2)}</pre>
+      ) : (
+        <p>No data found</p>
+      )}
     </div>
   );
 };
