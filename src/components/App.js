@@ -5,13 +5,15 @@ import axios from "axios";
 const App = () => {
   const [fetchData, setFetchData] = useState("");
   const [error, setError] = useState(true);
+  const [show, setShow] = useState();
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
+    fetch("https://dummyjsonroducts")
       .then((response) => response.json())
       .then((response) => setFetchData(response))
       .catch((err) => {
         console.log(err);
+        setShow(err);
         setError(false);
       });
   }, []);
@@ -22,7 +24,7 @@ const App = () => {
       {error ? (
         <pre>{JSON.stringify(fetchData, null, 2)}</pre>
       ) : (
-        <p>No data found</p>
+        <p>An error occurred:</p>
       )}
     </div>
   );
