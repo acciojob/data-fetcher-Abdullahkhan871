@@ -8,7 +8,7 @@ const App = () => {
   const [show, setShow] = useState();
 
   useEffect(() => {
-    fetch("https://dummyjsonroducts")
+    fetch("https://dummyjson.com/products")
       .then((response) => response.json())
       .then((response) => setFetchData(response))
       .catch((err) => {
